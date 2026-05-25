@@ -1,0 +1,24 @@
+name: QuickCHat CI
+
+on:
+ push:
+  branches:[main, KhanbanTaks]
+pull_requests:
+branches: [main]
+
+jobs:
+build-and-test:
+runs-on: ubuntu-latest
+
+steps:
+- name: Checkout code
+uses: actions/setup-java@v3
+with:
+java-version: '17'
+distribution: 'temurin'
+
+-name: Compile Java file
+run: javac srs/QuickChatApp.java -d out
+
+name: Run Tests
+run: java -cp out QuickChatApp
